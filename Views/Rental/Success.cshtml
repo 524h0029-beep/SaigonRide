@@ -1,0 +1,67 @@
+@model SaigonRide.Models.Rental
+
+@{
+    ViewData["Title"] = "Thuê xe thành công";
+}
+
+<div class="container py-4" style="max-width: 600px;">
+
+    <div class="text-center mb-4">
+        <div class="display-1 text-success">
+            <i class="bi bi-check-circle-fill"></i>
+        </div>
+        <h2 class="fw-bold mt-2" data-i18n="success.title">Thuê xe thành công!</h2>
+        <p class="text-muted" data-i18n="success.subtitle">Chúc bạn có chuyến đi vui vẻ!</p>
+    </div>
+
+    <div class="card shadow border-0 rounded-4 mb-4">
+        <div class="card-body p-4">
+            <h5 class="text-primary mb-3">
+                <i class="bi bi-receipt me-2"></i>
+                <span data-i18n="success.tripinfo">Thông tin chuyến đi</span>
+            </h5>
+
+            <table class="table table-borderless">
+                <tr>
+                    <td><strong data-i18n="success.id">Rental ID:</strong></td>
+                    <td>#@Model.RentalID</td>
+                </tr>
+                <tr>
+                    <td><strong data-i18n="success.type">Loại xe:</strong></td>
+                    <td>@Model.Vehicle?.Type</td>
+                </tr>
+                <tr>
+                    <td><strong data-i18n="success.station">Trạm xuất phát:</strong></td>
+                    <td>@(Model.Vehicle?.Station?.StationName ?? "N/A")</td>
+                </tr>
+                <tr>
+                    <td><strong data-i18n="success.starttime">Giờ bắt đầu:</strong></td>
+                    <td class="text-success fw-bold">
+                        @Model.StartTime.ToString("HH:mm - dd/MM/yyyy")
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong data-i18n="success.price">Giá thuê:</strong></td>
+                    <td>@Model.Vehicle?.PricePerMinute.ToString("N0") VND/phút</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="alert alert-success d-flex align-items-start gap-2">
+        <i class="bi bi-tag-fill fs-5 mt-1"></i>
+        <div data-i18n-html="success.discount.info">
+            Giảm <strong>15%</strong> sẽ được áp dụng khi bạn trả xe về trạm đang có số xe dưới 20% sức chứa.
+        </div>
+    </div>
+
+    <div class="d-flex gap-3">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary flex-fill">
+            <i class="bi bi-house-fill me-2"></i><span data-i18n="success.home">Trang chủ</span>
+        </a>
+        <a asp-controller="Rental" asp-action="MyRentals" class="btn btn-outline-primary flex-fill">
+            <i class="bi bi-clock-history me-2"></i><span data-i18n="success.history">Lịch sử thuê</span>
+        </a>
+    </div>
+
+</div>
